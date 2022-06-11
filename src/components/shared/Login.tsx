@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import LoginForm from "../LoginForm";
+import LoginForm from "./LoginForm";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLogin } from "../../state/slice/loginSlice";
 import { storeType } from "../../state/store";
 
 type Props = {};
 
-const Login = (props: Props) => {
+const Login: React.FunctionComponent = (props: Props) => {
 
     const logged = useSelector((state: storeType) => state.logged);
 
@@ -29,7 +29,7 @@ const Login = (props: Props) => {
 
     return (
         <>
-            <button className="btn btn-primary" onClick={(e) => showLoginModal(e)}>
+            <button className="btn btn-dark" onClick={(e) => showLoginModal(e)}>
                 {logged ? 'Log out' : 'Log in'}
             </button>
 

@@ -1,13 +1,12 @@
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import PrivateComponent from "./PrivateComponent";
 import { Link } from "react-router-dom";
+import Login from "./Login";
 
-type Props = {};
-
-const NavigationBar = (props: Props) => {
+const NavigationBar: React.FunctionComponent = () => {
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="secondary" variant="light" expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
                 <Nav className="me-auto">
@@ -22,6 +21,7 @@ const NavigationBar = (props: Props) => {
                         </>
                     </PrivateComponent>
                 </Nav>
+                <Login />
             </Container>
         </Navbar>
     );

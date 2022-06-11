@@ -3,7 +3,7 @@ import { productType } from "./productSlice";
 
 type orderType = {
     id?: string,
-    dateOfOrder: string,
+    dateOfOrder: Date,
     product: productType,
     units: number
 }
@@ -14,27 +14,7 @@ type orderStateType = {
 }
 
 const initialState: orderStateType = {
-    orders: [{
-        id: "654dg654g",
-        dateOfOrder: '',
-        product: {
-            id: '987654321',
-            name: 'Screw 0.5 in',
-            description: 'material: steel',
-            stock: 0,
-            minimumAmount: 50,
-            maximumAmount: 200,
-            price: 200,
-            supplier: {
-                id: '123456789',
-                name: 'Tuerca Loca',
-                phoneNumber: '3216549870',
-                notes: 'screws, steel wire, and others',
-                personalId: '1074205803'
-            }
-        },
-        units: 60
-    }],
+    orders: [],
     productToOrder: {
         name: '',
         description: '',
@@ -57,10 +37,14 @@ const orderSlice = createSlice(
         initialState,
         reducers: {
             createOrder(state, action) {
-                return state
+                const currentListOfOrders = state.orders
+                const newListOfOrders = [...currentListOfOrders, action.payload]
+                const newStateAfterAddNewNote = { ...state, orders: newListOfOrders }
+                return newStateAfterAddNewNote
             },
-            getOrders(state, action) {
-                return state
+            getAllOrders(state, action) {
+                const orderStateAfterLoadOrders = { ...state, orders: action.payload }
+                return orderStateAfterLoadOrders
             },
             loadOrderForm(state, action) {
                 const productToOrder = action.payload
@@ -71,7 +55,7 @@ const orderSlice = createSlice(
     }
 )
 
-export const { createOrder, getOrders, loadOrderForm } = orderSlice.actions
+export const { createOrder, getAllOrders, loadOrderForm } = orderSlice.actions
 
 export default orderSlice.reducer
 

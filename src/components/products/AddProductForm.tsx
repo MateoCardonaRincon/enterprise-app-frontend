@@ -93,7 +93,7 @@ const AddProductForm = (props: Props) => {
                     <input type="number" name="macimum" onChange={addMaximum} placeholder="Maximum amount" required />
                 </div>
                 <div className="row my-2">
-                    <input type="number" name="price" onChange={addPrice} placeholder="Price per unit" required />
+                    <input type="number" name="price" onChange={addPrice} placeholder="Unit price" required />
                 </div>
                 <div className="row my-2">
                     <select className="mb-1" name="supplier" onChange={(e) => addSupplier(e)} required >

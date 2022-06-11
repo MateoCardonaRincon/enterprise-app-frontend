@@ -1,20 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import SuppliersTable from '../components/SuppliersTable'
 import SupplierSubscription from '../components/SupplierSubscription'
+import { getSuppliers } from '../services/supplierService'
+import { getAllSuppliers } from '../state/slice/supplierSlice'
 
 type Props = {}
 
 const Suppliers = (props: Props) => {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        getSuppliers().then(
+            suppliers => {
+                dispatch(getAllSuppliers(suppliers))
+            }
+        )
+
+    }, [])
     return (
         <div className="container">
             <div className="d-flex flex-row justify-content-center my-4">
                 <h3>Suppliers</h3>
             </div>
             <div className="row">
-                <div className="col-5">
+                <div className="col-4">
                     <SupplierSubscription />
                 </div>
-                <div className="col-7">
+                <div className="col-8">
                     <SuppliersTable />
                 </div>
             </div>

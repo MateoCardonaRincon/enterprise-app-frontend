@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
+import { saveSupplier } from '../services/supplierService'
 import { subscribeSupplier, supplierType } from '../state/slice/supplierSlice'
 
 const SupplierSubscription: React.FunctionComponent = () => {
@@ -25,17 +26,18 @@ const SupplierSubscription: React.FunctionComponent = () => {
         setDocument(e.target.value)
     }
 
-    const addSupplier = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const addSupplier = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
         console.log("supplier", supplierName)
         if (supplierName && contactNumber && notes && document) {
             const supplierToSubscribe: supplierType = {
                 name: supplierName,
-                contact: contactNumber,
+                phoneNumber: contactNumber,
                 notes: notes,
-                document: document
+                personalId: document
             }
-            dispatch(subscribeSupplier(supplierToSubscribe))
+            let supplierSaved = await saveSupplier(supplierToSubscribe);
+            dispatch(subscribeSupplier(supplierSaved))
             setSupplierName('')
             setContactNumber('')
             setNotes('')

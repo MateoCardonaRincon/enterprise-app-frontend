@@ -28,8 +28,7 @@ const initialState: productType[] = [
             phoneNumber: '3216549870',
             notes: 'screws, steel wire, and others',
             personalId: '1074205803'
-        },
-        soldUnits: 0
+        }
     }
 ]
 

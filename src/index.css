@@ -21,10 +21,16 @@ header {
   align-items: center;
 }
 
-input {
-    border: 0px;
-    border-radius: 5px;
-    font-size: calc(5px + 2vmin);
+input,
+select {
+  border: 0px;
+  border-radius: 5px;
+  font-size: calc(5px + 2vmin);
+  padding: 2px;
+}
+
+span {
+  font-size: 12px;
 }
 
 .form {
@@ -32,6 +38,6 @@ input {
   border-radius: 5px;
 }
 
-.stock-alert{
-    border-left: 5px solid #D93838;
+.stock-alert {
+  border-left: 5px solid #d93838;
 }

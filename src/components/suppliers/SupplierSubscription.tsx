@@ -28,7 +28,6 @@ const SupplierSubscription: React.FunctionComponent = () => {
 
     const addSupplier = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        console.log("supplier", supplierName)
         if (supplierName && contactNumber && notes && document) {
             const supplierToSubscribe: supplierType = {
                 name: supplierName,

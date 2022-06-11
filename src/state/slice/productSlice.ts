@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { supplierType } from "./supplierSlice";
 
 type productType = {
-    id: string,
+    id?: string,
     name: string,
     description: string,
     stock: number,
@@ -13,24 +13,7 @@ type productType = {
     soldUnits?: number
 }
 
-const initialState: productType[] = [
-    {
-        id: '987654321',
-        name: 'Screw 0.5 in',
-        description: 'material: steel',
-        stock: 50,
-        minimumAmount: 50,
-        maximumAmount: 200,
-        price: 200,
-        supplier: {
-            id: '123456789',
-            name: 'Tuerca Loca',
-            phoneNumber: '3216549870',
-            notes: 'screws, steel wire, and others',
-            personalId: '1074205803'
-        }
-    }
-]
+const initialState: productType[] = []
 
 const productSlice = createSlice(
     {
@@ -38,13 +21,10 @@ const productSlice = createSlice(
         initialState,
         reducers: {
             addProduct(state, action) {
-                return state
+                state.push(action.payload);
             },
-            getAllProduct(state, action) {
-                return state
-            },
-            deleteProduct(state, action) {
-                return state
+            getAllProducts(state, action) {
+                return action.payload
             },
             restockProduct(state, action) {
                 return state
@@ -58,8 +38,7 @@ const productSlice = createSlice(
 
 export const {
     addProduct,
-    getAllProduct,
-    deleteProduct,
+    getAllProducts,
     restockProduct,
     sellProducts } = productSlice.actions
 

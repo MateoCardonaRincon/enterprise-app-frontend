@@ -1,49 +1,57 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import LoginForm from "../LoginForm";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleLogin } from "../../state/slice/loginSlice";
+import { storeType } from "../../state/store";
 
 type Props = {};
 
 const Login = (props: Props) => {
 
-  const [show, setShow] = useState(false);
+    const logged = useSelector((state: storeType) => state.logged);
 
-  const showLoginModal = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    setShow(true);
-  };
+    const dispatch = useDispatch();
 
-  const handleClose = () => {
-    setShow(false);
-  };
+    const [show, setShow] = useState(false);
 
-  return (
-    <>
-      <button className="btn btn-primary" onClick={(e) => showLoginModal(e)}>
-        Log in
-      </button>
+    const showLoginModal = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        e.preventDefault();
+        setShow(true);
+        dispatch(toggleLogin())
+    };
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
-          <Modal.Title>
-            <h5>LOG IN</h5>
-          </Modal.Title>
-        </Modal.Header>
+    const handleClose = () => {
+        setShow(false);
+    };
 
-        <Modal.Body>
-          <LoginForm/>
-        </Modal.Body>
+    return (
+        <>
+            <button className="btn btn-primary" onClick={(e) => showLoginModal(e)}>
+                {logged ? 'Log out' : 'Log in'}
+            </button>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header>
+                    <Modal.Title>
+                        <h5>LOG IN</h5>
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <LoginForm />
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
 };
 
 export default Login;

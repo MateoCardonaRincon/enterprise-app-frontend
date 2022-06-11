@@ -52,7 +52,7 @@ const initialState: billType[] = [
                 soldUnits: 15
             }
         ],
-    totalPaid: 6000
+        totalPaid: 6000
     }
 ]
 

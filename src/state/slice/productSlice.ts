@@ -18,7 +18,7 @@ const initialState: productType[] = [
         id: '987654321',
         name: 'Screw 0.5 in',
         description: 'material: steel',
-        stock: 0,
+        stock: 50,
         minimumAmount: 50,
         maximumAmount: 200,
         price: 200,

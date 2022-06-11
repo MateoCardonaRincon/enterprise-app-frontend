@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { removeSupplier } from '../services/supplierService';
-import { deleteSupplier, supplierType } from '../state/slice/supplierSlice';
-import { storeType } from '../state/store';
+import { removeSupplier } from '../../services/supplierService';
+import { deleteSupplier, supplierType } from '../../state/slice/supplierSlice';
+import { storeType } from '../../state/store';
 
 
 const SuppliersTable: React.FunctionComponent = () => {
@@ -13,7 +13,6 @@ const SuppliersTable: React.FunctionComponent = () => {
 
     const onRemove = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, supplier: supplierType) => {
         const status = await removeSupplier(supplier)
-        console.log(status)
         if (status === 204) {
             dispatch(deleteSupplier(supplier))
         }

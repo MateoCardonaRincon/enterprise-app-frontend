@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
-import { saveSupplier } from '../services/supplierService'
-import { subscribeSupplier, supplierType } from '../state/slice/supplierSlice'
+import { saveSupplier } from '../../services/supplierService'
+import { subscribeSupplier, supplierType } from '../../state/slice/supplierSlice'
 
 const SupplierSubscription: React.FunctionComponent = () => {
 

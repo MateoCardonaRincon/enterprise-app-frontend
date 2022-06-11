@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import SuppliersTable from '../components/SuppliersTable'
-import SupplierSubscription from '../components/SupplierSubscription'
+import SuppliersTable from '../components/suppliers/SuppliersTable'
+import SupplierSubscription from '../components/suppliers/SupplierSubscription'
 import { getSuppliers } from '../services/supplierService'
 import { getAllSuppliers } from '../state/slice/supplierSlice'
 

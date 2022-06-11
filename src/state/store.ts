@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import suppliersReducer, { supplierType } from './slice/supplierSlice'
 import productsReducer, { productType } from './slice/productSlice'
 import billsReducer, { billType } from './slice/billSlice'
-import ordersReducer, { orderType } from './slice/orderSlice'
+import ordersReducer, { orderStateType } from './slice/orderSlice'
 import loginReducer from "./slice/loginSlice";
 
 const store = configureStore(
@@ -21,7 +21,7 @@ type storeType = {
     suppliers: supplierType[],
     products: productType[],
     bills: billType[],
-    orders: orderType[],
+    orders: orderStateType,
     logged: boolean
 }
 

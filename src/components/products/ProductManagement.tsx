@@ -4,15 +4,15 @@ import OrderProductForm from './OrderProductForm'
 
 type Props = {}
 
-const ProductManagement:React.FunctionComponent = (props: Props) => {
+const ProductManagement: React.FunctionComponent = (props: Props) => {
 
     return (
-        <div>
-            <div className="row my-4">
-                <AddProductForm />
-            </div>
-            <div className="row my-4">
+        <div className="container">
+            <div className="row mb-4">
                 <OrderProductForm />
+            </div>
+            <div className="row">
+                <AddProductForm />
             </div>
         </div>
     )

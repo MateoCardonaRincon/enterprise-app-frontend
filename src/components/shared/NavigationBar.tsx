@@ -6,7 +6,7 @@ import Login from "./Login";
 
 const NavigationBar: React.FunctionComponent = () => {
     return (
-        <Navbar bg="secondary" variant="light" expand="lg">
+        <Navbar bg="secondary sticky-top" variant="light" expand="lg">
             <Container>
                 <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
                 <Nav className="me-auto">

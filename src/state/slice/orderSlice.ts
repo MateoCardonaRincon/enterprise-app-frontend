@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { productType } from "./productSlice";
-import { supplierType } from "./supplierSlice";
 
 type orderType = {
-    id: string,
-    dateOfOrder: Date,
+    id?: string,
+    dateOfOrder: string,
     product: productType,
     units: number
 }
 
-const initialState: orderType[] = [
-    {
+type orderStateType = {
+    orders: orderType[],
+    productToOrder: productType
+}
+
+const initialState: orderStateType = {
+    orders: [{
         id: "654dg654g",
-        dateOfOrder: new Date(Date.now()),
+        dateOfOrder: '',
         product: {
             id: '987654321',
             name: 'Screw 0.5 in',
@@ -30,12 +34,26 @@ const initialState: orderType[] = [
             }
         },
         units: 60
+    }],
+    productToOrder: {
+        name: '',
+        description: '',
+        stock: 0,
+        minimumAmount: 0,
+        maximumAmount: 0,
+        price: 0,
+        supplier: {
+            name: '-',
+            phoneNumber: '0',
+            notes: '',
+            personalId: ''
+        }
     }
-]
+}
 
 const orderSlice = createSlice(
     {
-        name: 'pruducts',
+        name: 'orders',
         initialState,
         reducers: {
             createOrder(state, action) {
@@ -43,13 +61,18 @@ const orderSlice = createSlice(
             },
             getOrders(state, action) {
                 return state
+            },
+            loadOrderForm(state, action) {
+                const productToOrder = action.payload
+                const stateWithLoadedOrder = { ...state, productToOrder: productToOrder }
+                return stateWithLoadedOrder
             }
         }
     }
 )
 
-export const { createOrder, getOrders } = orderSlice.actions
+export const { createOrder, getOrders, loadOrderForm } = orderSlice.actions
 
 export default orderSlice.reducer
 
-export type { orderType }
+export type { orderType, orderStateType }

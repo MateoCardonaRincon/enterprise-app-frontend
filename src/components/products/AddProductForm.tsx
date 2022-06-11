@@ -14,12 +14,13 @@ const AddProductForm = (props: Props) => {
 
     const dispatch = useDispatch()
 
-    // const formRef = useRef(null)
+    const formRef = useRef<HTMLFormElement>(null)
+
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
-    const [minimum, setMinimum] = useState<number>(0)
-    const [maximum, setMaximum] = useState<number>(0)
-    const [price, setPrice] = useState<number>(0)
+    const [minimum, setMinimum] = useState<number>()
+    const [maximum, setMaximum] = useState<number>()
+    const [price, setPrice] = useState<number>()
     const [supplierId, setSupplierId] = useState("")
 
     const addName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +51,6 @@ const AddProductForm = (props: Props) => {
         e.preventDefault()
         let supplierSelected = suppliers.find((supplier) => supplier.id === supplierId)
         if (name && description && minimum && maximum && price && supplierId && supplierSelected) {
-            console.log("In OnAddProduct")
             const productToAdd: productType = {
                 name: name,
                 description: description,
@@ -67,11 +67,14 @@ const AddProductForm = (props: Props) => {
             setMinimum(0)
             setMaximum(0)
             setPrice(0)
+            if (null !== formRef.current) {
+                formRef.current.reset();
+            }
         }
     }
 
     return (
-        <form className="form">
+        <form className="form" ref={formRef}>
             <div className="container pt-4 pb-2">
 
                 <div className="d-flex flex-row justify-content-center">
@@ -84,13 +87,13 @@ const AddProductForm = (props: Props) => {
                     <input type="text" name="description" value={description} onChange={addDescription} placeholder="Description" required />
                 </div>
                 <div className="row my-2">
-                    <input type="text" name="minimum" onChange={addMinimum} placeholder="Minimum amount" required />
+                    <input type="number" name="minimum" onChange={addMinimum} placeholder="Minimum amount" required />
                 </div>
                 <div className="row my-2">
-                    <input type="text" name="macimum" onChange={addMaximum} placeholder="Maximum amount" required />
+                    <input type="number" name="macimum" onChange={addMaximum} placeholder="Maximum amount" required />
                 </div>
                 <div className="row my-2">
-                    <input type="text" name="price" onChange={addPrice} placeholder="Price per unit" required />
+                    <input type="number" name="price" onChange={addPrice} placeholder="Price per unit" required />
                 </div>
                 <div className="row my-2">
                     <select className="mb-1" name="supplier" onChange={(e) => addSupplier(e)} required >
@@ -99,7 +102,7 @@ const AddProductForm = (props: Props) => {
                             <option value={supplier.id} key={supplier.id}>{`${supplier.name} (${supplier.notes})`}</option>
                         )}
                     </select>
-                    <span>Can't find a supplier?
+                    <span className="link">Can't find a supplier?
                         <Link to="/suppliers">
                             <span style={{ color: "#d93838" }}>  Subscribe one!</span>
                         </Link>

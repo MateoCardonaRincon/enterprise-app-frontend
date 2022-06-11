@@ -10,8 +10,31 @@ import Orders from "./pages/Orders";
 import Products from "./pages/Products";
 import Sales from "./pages/Sales";
 import Suppliers from "./pages/Suppliers";
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { getSuppliers } from "./services/supplierService";
+import { getAllSuppliers } from "./state/slice/supplierSlice";
+import { getProducts } from "./services/productService";
+import { getAllProducts } from "./state/slice/productSlice";
 
 function App() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        getSuppliers().then(
+            suppliers => {
+                dispatch(getAllSuppliers(suppliers))
+            }
+        )
+        getProducts().then(
+            products => {
+                dispatch(getAllProducts(products))
+            }
+        )
+
+    }, [])
+
     return (
         <BrowserRouter>
             <Header />

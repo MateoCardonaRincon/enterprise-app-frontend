@@ -26,10 +26,10 @@ select {
   border: 0px;
   border-radius: 5px;
   font-size: calc(5px + 2vmin);
-  padding: 2px;
+  padding: 3px;
 }
 
-span {
+.link {
   font-size: 12px;
 }
 
@@ -40,4 +40,15 @@ span {
 
 .stock-alert {
   border-left: 5px solid #d93838;
+}
+
+.product-div {
+  border-radius: 5px;
+  box-shadow: 3px 3px 0.4em rgb(112, 112, 112);
+  padding: 1%;
+  align-items: center;
+}
+
+.product-div:hover {
+  background-color: #ffd600;
 }

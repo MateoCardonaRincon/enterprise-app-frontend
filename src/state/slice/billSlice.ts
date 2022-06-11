@@ -3,7 +3,7 @@ import { productType } from "./productSlice";
 
 type billType = {
     id: string,
-    dateOfSale: Date,
+    dateOfSale: string,
     customerName: string,
     sellerName: string,
     soldProducts: productType[]
@@ -13,7 +13,7 @@ type billType = {
 const initialState: billType[] = [
     {
         id: "65432187",
-        dateOfSale: new Date(Date.now()),
+        dateOfSale: '',
         customerName: "Mateo",
         sellerName: "Don Raul",
         soldProducts: [

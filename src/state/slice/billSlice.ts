@@ -6,7 +6,7 @@ type billType = {
     dateOfSale: Date,
     customerName: string,
     sellerName: string,
-    soldProducts: productType[]
+    soldProducts: productType[],
     totalPaid: number
 }
 

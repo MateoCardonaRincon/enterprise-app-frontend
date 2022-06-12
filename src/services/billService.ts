@@ -6,7 +6,7 @@ export const getBills = async (): Promise<billType[]> => {
     return data
 }
 
-export const saveOrder = async (bill: billType): Promise<billType> => {
+export const saveBill = async (bill: billType): Promise<billType> => {
     let billSaved = await fetch("http://localhost:8080/bill/create", {
         method: "POST",
         headers: {

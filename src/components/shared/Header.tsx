@@ -6,7 +6,7 @@ const Header: React.FunctionComponent = () => {
                 <h3>🪓Don Raul's Hardware Store🔧</h3>
             </div>
             <div>
-                <span>Powered by MCR 💻</span>
+                <span>Developed by MCR 💻</span>
             </div>
         </header>
     );

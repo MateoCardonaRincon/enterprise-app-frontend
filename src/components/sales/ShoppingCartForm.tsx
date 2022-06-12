@@ -74,8 +74,6 @@ const ShoppingCartForm = (props: Props) => {
             }
 
             let billSaved = await saveBill(billToSave);
-
-            dispatch(createBill(billSaved))
             setShowAlert(true)
             setShowClientForm(false)
             if (null !== formRef.current) {

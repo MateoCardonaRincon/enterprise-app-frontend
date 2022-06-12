@@ -9,12 +9,19 @@ const SuppliersTable: React.FunctionComponent = () => {
 
     const suppliers = useSelector((state: storeType) => state.suppliers);
 
+    const products = useSelector((state: storeType) => state.products);
+
     const dispatch = useDispatch()
 
     const onRemove = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, supplier: supplierType) => {
-        const status = await removeSupplier(supplier)
-        if (status === 204) {
-            dispatch(deleteSupplier(supplier))
+
+        const haveAssociatedProducts = products.filter(product => product.supplier.id === supplier.id)
+
+        if (haveAssociatedProducts.length === 0) {
+            const status = await removeSupplier(supplier)
+            if (status === 204) {
+                dispatch(deleteSupplier(supplier))
+            }
         }
     }
 

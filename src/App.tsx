@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/shared/Header";
 import NavigationBar from "./components/shared/NavigationBar";
-import About from "./pages/About";
 import Bills from "./pages/Bills";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -43,7 +42,6 @@ function App() {
             <NavigationBar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
                 <Route path="/stock" element={<Products />} />
                 <Route path="/sales" element={<Sales />} />
                 <Route path="/suppliers" element={<Suppliers />} />

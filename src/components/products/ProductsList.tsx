@@ -20,7 +20,7 @@ const ProductsList: React.FunctionComponent = (props: Props) => {
         <div className="container px-5">
             <div className="row">
                 {products.map(product => {
-                    return <div className={"d-flex flex-row my-2 product-div " + (product.stock <= product.minimumAmount ? "stock-alert" : "")}
+                    return <div className={"d-flex flex-row my-2 card " + (product.stock <= product.minimumAmount ? "stock-alert" : "")}
                         key={product.id}>
                         <div className="col-10">
                             <div className="container">

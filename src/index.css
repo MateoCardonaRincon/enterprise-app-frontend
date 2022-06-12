@@ -29,6 +29,11 @@ select {
   padding: 3px;
 }
 
+p {
+  padding: 0;
+  margin: 0;
+}
+
 .link {
   font-size: 12px;
 }
@@ -38,18 +43,26 @@ select {
   border-radius: 5px;
 }
 
+.details {
+  background-color: #90bdff;
+  border-radius: 5px;
+}
+
 .stock-alert {
   border-left: 5px solid #d93838;
 }
 
-.product-div {
+.card {
+  display: inline-flex;
+  flex-direction: row;
   border-radius: 5px;
   box-shadow: 3px 3px 0.4em rgb(112, 112, 112);
   padding: 1%;
   align-items: center;
+  justify-content: center;
 }
 
-.product-div:hover {
+.card:hover {
   background-color: #ffd600;
 }
 
@@ -61,4 +74,8 @@ select {
 
 .validator:hover {
   box-shadow: 3px 3px 0.4em rgb(126, 125, 125);
+}
+
+.indent {
+  text-indent: 2em;
 }

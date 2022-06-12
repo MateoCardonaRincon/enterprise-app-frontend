@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import BillsList from '../components/bills/BillsList'
+import BillsList from '../components/sales/BillsList'
 import { getBills } from '../services/billService'
 import { getAllBills } from '../state/slice/billSlice'
 

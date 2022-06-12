@@ -8,7 +8,7 @@ type Props = {}
 const BillsList: React.FunctionComponent = (props: Props) => {
 
 
-    const bills = useSelector((state: storeType) => state.bills);
+    const bills = useSelector((state: storeType) => state.bills.bills);
 
     const dispatch = useDispatch()
 
@@ -58,11 +58,6 @@ const BillsList: React.FunctionComponent = (props: Props) => {
                                                 <p className="indent"> <b>Subtotal: </b>{product.price * (product.soldUnits ? product.soldUnits : 0)} <br /> </p>
                                             </div>
                                         )}
-
-                                        {/* <p className="indent"> <b>Name: </b>{bill.product.name} <br /> </p>
-                                        <p className="indent"> <b>Description: </b>{bill.product.description} <br /> </p>
-                                        <p className="indent"> <b>Provider: </b>{bill.product.supplier.name} <br /></p>
-                                        <p className="indent"> <b>Unit price: </b>{bill.product.price} <br /> </p> */}
                                     </div>
                                 </div >
                             </div>

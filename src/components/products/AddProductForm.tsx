@@ -49,8 +49,11 @@ const AddProductForm = (props: Props) => {
 
     const onAddProduct = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
+
         let supplierSelected = suppliers.find((supplier) => supplier.id === supplierId)
-        if (name && description && minimum && maximum && price && supplierId && supplierSelected) {
+
+        if (name && description && minimum && maximum &&
+            price && supplierId && supplierSelected && maximum > minimum) {
             const productToAdd: productType = {
                 name: name,
                 description: description,
@@ -68,6 +71,7 @@ const AddProductForm = (props: Props) => {
             setMaximum(0)
             setPrice(0)
             if (null !== formRef.current) {
+                console.log("enter")
                 formRef.current.reset();
             }
         }
@@ -98,8 +102,10 @@ const AddProductForm = (props: Props) => {
                 <div className="row my-2">
                     <select className="mb-1" name="supplier" onChange={(e) => addSupplier(e)} required >
                         <option value=''>Suppliers...</option>
-                        {suppliers.map(supplier =>
-                            <option value={supplier.id} key={supplier.id}>{`${supplier.name} (${supplier.notes})`}</option>
+                        {suppliers.map(supplier => {
+                            return <option value={supplier.id} key={supplier.id}>{`${supplier.name} (${supplier.notes})`}</option>
+                        }
+
                         )}
                     </select>
                     <span className="link">Can't find a supplier?

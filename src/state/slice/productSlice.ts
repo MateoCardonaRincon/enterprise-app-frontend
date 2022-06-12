@@ -27,7 +27,17 @@ const productSlice = createSlice(
                 return action.payload
             },
             restockProduct(state, action) {
-                return state
+                const productToRestock = action.payload.productToOrder
+
+                const unitsOrdered = action.payload.unitsToOrder
+
+                const unitsToRestock = (unitsOrdered + productToRestock.stock <= productToRestock.maximumAmount) ?
+                    unitsOrdered : productToRestock.maximumAmount - productToRestock.stock
+
+                const restockedProduct = { ...productToRestock, stock: unitsToRestock + productToRestock.stock }
+
+                const newListOfProducts = state.map(product => product.id === restockedProduct.id ? restockedProduct : product)
+                return newListOfProducts
             },
             sellProducts(state, action) {
                 return state

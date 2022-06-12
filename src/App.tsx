@@ -11,13 +11,16 @@ import Products from "./pages/Products";
 import Sales from "./pages/Sales";
 import Suppliers from "./pages/Suppliers";
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getSuppliers } from "./services/supplierService";
 import { getAllSuppliers } from "./state/slice/supplierSlice";
 import { getProducts } from "./services/productService";
-import { getAllProducts } from "./state/slice/productSlice";
+import { getAllProducts, restockProduct } from "./state/slice/productSlice";
+import { storeType } from "./state/store";
 
 function App() {
+
+    const state = useSelector((state: storeType) => state)
 
     const dispatch = useDispatch();
 
@@ -32,7 +35,6 @@ function App() {
                 dispatch(getAllProducts(products))
             }
         )
-
     }, [])
 
     return (

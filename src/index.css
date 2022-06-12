@@ -52,3 +52,13 @@ select {
 .product-div:hover {
   background-color: #ffd600;
 }
+
+.validator {
+  background-color: #23b95a;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.validator:hover {
+  box-shadow: 3px 3px 0.4em rgb(126, 125, 125);
+}

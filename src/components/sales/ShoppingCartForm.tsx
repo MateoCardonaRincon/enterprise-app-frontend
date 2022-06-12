@@ -13,9 +13,9 @@ const ShoppingCartForm = (props: Props) => {
 
     const dispatch = useDispatch()
 
-    const formRef = useRef(null)
+    const formRef = useRef<HTMLFormElement>(null)
 
-    const [units, setUnits] = useState<number>()
+    const [units, setUnits] = useState(0)
     const [productId, setProductId] = useState("")
     const [cart, setCart] = useState<any>([])
     const [client, setClient] = useState("")
@@ -23,6 +23,7 @@ const ShoppingCartForm = (props: Props) => {
     const [totalPaid, setTotalPaid] = useState(0)
     const [showWarning, setShowWarning] = useState(false)
     const [showClientForm, setShowClientForm] = useState(false)
+    const [showAlert, setShowAlert] = useState(false);
 
     const addUnits = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUnits(parseInt(e.target.value))
@@ -46,14 +47,12 @@ const ShoppingCartForm = (props: Props) => {
         const isAlreadyInCart = cart.filter((product: productType) => product.id === productId)
         const productWithSoldUnits = { ...selectedProduct, soldUnits: units }
 
-        if (isAlreadyInCart.length !== 0) {
-            setShowWarning(true)
-        }
-
-        if (isAlreadyInCart.length === 0 && productId && units) {
+        if (isAlreadyInCart.length === 0 && productId && (units <= (productWithSoldUnits.stock ? productWithSoldUnits.stock : 0))) {
             setCart([...cart, productWithSoldUnits])
             setTotalPaid(totalPaid + (productWithSoldUnits.price ? productWithSoldUnits.price : 0) * units)
             setShowWarning(false)
+        } else {
+            setShowWarning(true)
         }
     }
 
@@ -77,7 +76,17 @@ const ShoppingCartForm = (props: Props) => {
             let billSaved = await saveBill(billToSave);
 
             dispatch(createBill(billSaved))
+            setShowAlert(true)
+            setShowClientForm(false)
+            if (null !== formRef.current) {
+                formRef.current.reset();
+            }
         }
+    }
+
+    const closeValidation = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        setShowAlert(false)
     }
 
     return (
@@ -100,7 +109,9 @@ const ShoppingCartForm = (props: Props) => {
                             <input className="w-100 mb-1" type="number" name="units" onChange={(e) => addUnits(e)} placeholder="Units" required />
                         </div>
                     </div>
-                    {showWarning ? <span className="link" style={{ color: "#d93838" }}>This product already exist in the cart.</span> : <></>}
+                    {showWarning ? <span className="link" style={{ color: "#d93838" }}>
+                        This product already exist in the cart or the amount exceeded the current stock ({products.find(product => product.id === productId)?.stock}).
+                    </span> : <></>}
                     <div className="row my-2">
                         <button className="btn btn-primary" onClick={e => onAddProduct(e)}>Add to Cart</button>
                     </div>
@@ -132,7 +143,13 @@ const ShoppingCartForm = (props: Props) => {
                         <div className="row my-4">
                             <button className="btn btn-primary" onClick={onGenerateBill}>Generate Bill</button>
                         </div>
-                    </div> : <></>}
+                    </div> :
+                    (showAlert ? <div className="d-flex validator">
+                        <div className="d-flex justify-content-center mx-auto">
+                            <span onClick={closeValidation}>Your bill was created successfully!</span> <br />
+                        </div>
+                    </div> : <></>)
+                }
             </div>
         </form>
     )

@@ -28,12 +28,12 @@ const OrdersList = (props: Props) => {
         <div className="container">
             {orders.map(order =>
                 <div className="container" key={order.id}>
-                    <div className="d-flex flex-row my-2 card w-100 justify-content-around" key={order.id}>
-                        <div className="d-flex flex-col-2"><b>{order.dateOfOrder.toString()}</b></div>
-                        <div className="d-flex flex-col-6">{order.product.description}</div>
-                        <div className="d-flex flex-col-2">{order.units} units</div>
-                        <div className="d-flex flex-col-2">${order.units * order.product.price}</div>
-                        <div className="d-flex flex-col-2">
+                    <div className="d-flex flex-row my-2 card w-100 justify-content-between" key={order.id}>
+                        <div className="d-flex col-2"><b>{order.dateOfOrder.toString()}</b></div>
+                        <div className="d-flex col-4">{order.product.description}</div>
+                        <div className="d-flex col-2">{order.units} units</div>
+                        <div className="d-flex col-2">${order.units * order.product.price}</div>
+                        <div className="d-flex col-2">
                             <button className="btn btn-success" onClick={(e) => onShowDetails(e, order)}>
                                 📖
                             </button>

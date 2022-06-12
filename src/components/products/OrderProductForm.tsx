@@ -17,7 +17,7 @@ const OrderProductForm = (props: Props) => {
     const formRef = useRef<HTMLFormElement>(null)
 
     const [unitsToOrder, setUnitsToOrder] = useState(0);
-    
+
     const [showAlert, setShowAlert] = useState(false);
 
     const [showValidation, setShowValidation] = useState(false);
@@ -57,7 +57,7 @@ const OrderProductForm = (props: Props) => {
 
             dispatch(createOrder(orderCreated))
             dispatch(restockProduct({ productToOrder, unitsToOrder }))
-            dispatch(loadOrderForm({ ...productToOrder, id:null }))
+            dispatch(loadOrderForm({ ...productToOrder, id: null }))
 
             if (unitsToOrder + productToOrder.stock > productToOrder.maximumAmount) {
                 setShowAlert(true)
@@ -131,7 +131,7 @@ const OrderProductForm = (props: Props) => {
             <div>
                 <span>Your order was created successfully </span> <br />
                 {showAlert ?
-                    <span>{`Stock exceeded! Only ${productToOrder.maximumAmount - productToOrder.stock} units were received.`}</span>
+                    <span onClick={closeValidation}>{`Stock exceeded! Only ${productToOrder.maximumAmount - productToOrder.stock} units were received.`}</span>
                     : <></>}
 
             </div>

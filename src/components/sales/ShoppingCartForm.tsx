@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveBill } from '../../services/billService'
-import { createBill } from '../../state/slice/billSlice'
+import { addProductToCart } from '../../state/slice/billSlice'
 import { productType } from '../../state/slice/productSlice'
 import { storeType } from '../../state/store'
 
@@ -74,6 +74,7 @@ const ShoppingCartForm = (props: Props) => {
             }
 
             let billSaved = await saveBill(billToSave);
+            dispatch(addProductToCart(cart))
             setShowAlert(true)
             setShowClientForm(false)
             if (null !== formRef.current) {

@@ -31,9 +31,6 @@ const billSlice = createSlice(
                 const stateAfterAddProductToCart = { ...state, cart: updatedCart }
                 return stateAfterAddProductToCart
             },
-            createBill(state, action) {
-                return state
-            },
             getAllBills(state, action) {
                 const billStateAfterLoadBills = { ...state, bills: action.payload }
                 return billStateAfterLoadBills
@@ -42,7 +39,7 @@ const billSlice = createSlice(
     }
 )
 
-export const { createBill, getAllBills } = billSlice.actions
+export const { addProductToCart, getAllBills } = billSlice.actions
 
 export default billSlice.reducer
 

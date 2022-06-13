@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import PrivateComponent from "./PrivateComponent";
 import { Link } from "react-router-dom";
-import Login from "./Login";
+import LoginModal from "../login/LoginModal";
+import { useSelector } from "react-redux";
+import { storeType } from "../../state/store";
 
-const NavigationBar: React.FunctionComponent = () => {
+type Props = {}
+
+const NavigationBar: React.FC<Props> = (props) => {
+
+    const logged = useSelector((state: storeType) => state.logged);
+
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+    const onShowLoginModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        setShowLoginModal(true);
+    };
+
     return (
         <Navbar bg="secondary sticky-top" variant="light" expand="lg">
             <Container>
@@ -20,7 +34,14 @@ const NavigationBar: React.FunctionComponent = () => {
                         </>
                     </PrivateComponent>
                 </Nav>
-                <Login />
+                {logged ?
+                    <button className="btn btn-dark" onClick={(e) => onShowLoginModal(e)}>
+                        Log Out
+                    </button> :
+                    <button className="btn btn-dark" onClick={(e) => onShowLoginModal(e)}>
+                        Log In
+                    </button>}
+                <LoginModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />
             </Container>
         </Navbar>
     );

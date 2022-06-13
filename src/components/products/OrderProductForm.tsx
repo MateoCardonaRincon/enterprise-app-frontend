@@ -8,7 +8,7 @@ import { storeType } from '../../state/store';
 
 type Props = {}
 
-const OrderProductForm = (props: Props) => {
+const OrderProductForm: React.FC<Props> = (props) => {
 
     const productToOrder = useSelector((state: storeType) => state.orders.productToOrder);
 

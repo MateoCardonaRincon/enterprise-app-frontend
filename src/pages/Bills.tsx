@@ -6,7 +6,7 @@ import { getAllBills } from '../state/slice/billSlice'
 
 type Props = {}
 
-const Bills = (props: Props) => {
+const Bills: React.FC<Props> = (props) => {
 
     const dispatch = useDispatch()
 

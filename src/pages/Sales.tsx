@@ -2,7 +2,7 @@ import ShoppingCartForm from '../components/sales/ShoppingCartForm'
 
 type Props = {}
 
-const Sales: React.FunctionComponent = (props: Props) => {
+const Sales: React.FC<Props> = (props) => {
 
     return (
         <div className="d-flex-column flex-container m-5">

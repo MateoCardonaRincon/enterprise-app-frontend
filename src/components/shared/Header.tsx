@@ -1,5 +1,6 @@
+type Props = {}
 
-const Header: React.FunctionComponent = () => {
+const Header: React.FC<Props> = (props) => {
     return (
         <header>
             <div>

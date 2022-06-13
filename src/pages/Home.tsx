@@ -1,6 +1,6 @@
 type Props = {}
 
-const Home = (props: Props) => {
+const Home: React.FC<Props> = (props) => {
     return (
         <div className="container">
             <div className="row">

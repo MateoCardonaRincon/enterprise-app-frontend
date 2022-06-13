@@ -6,7 +6,7 @@ import { getAllOrders } from '../state/slice/orderSlice'
 
 type Props = {}
 
-const Orders: React.FunctionComponent = (props: Props) => {
+const Orders: React.FC<Props> = (props) => {
 
     const dispatch = useDispatch()
 

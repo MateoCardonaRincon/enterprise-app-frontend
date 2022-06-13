@@ -4,7 +4,7 @@ import OrderProductForm from './OrderProductForm'
 
 type Props = {}
 
-const ProductManagement: React.FunctionComponent = (props: Props) => {
+const ProductManagement: React.FC<Props> = (Props) => {
 
     return (
         <div className="container">

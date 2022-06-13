@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux'
 import { saveSupplier } from '../../services/supplierService'
 import { subscribeSupplier, supplierType } from '../../state/slice/supplierSlice'
 
-const SupplierSubscription: React.FunctionComponent = () => {
+type Props = {}
+
+const SupplierSubscription: React.FC<Props> = (props) => {
 
     const dispatch = useDispatch()
 

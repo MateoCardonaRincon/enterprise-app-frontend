@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { orderType } from '../../state/slice/orderSlice';
 import { storeType } from '../../state/store';
+
 type Props = {}
 
-const OrdersList = (props: Props) => {
-
+const OrdersList: React.FC<Props> = (props) => {
 
     const orders = useSelector((state: storeType) => state.orders.orders);
 

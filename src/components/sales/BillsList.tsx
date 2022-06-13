@@ -5,7 +5,7 @@ import { storeType } from '../../state/store';
 
 type Props = {}
 
-const BillsList: React.FunctionComponent = (props: Props) => {
+const BillsList: React.FC<Props> = (props) => {
 
 
     const bills = useSelector((state: storeType) => state.bills.bills);

@@ -3,7 +3,7 @@ import ProductsList from '../components/products/ProductsList'
 
 type Props = {}
 
-const Products = (props: Props) => {
+const Products: React.FC<Props> = (props) => {
     return (
         <div className="d-flex-column flex-container m-5">
             <div className="d-flex flex-row justify-content-center my-4">

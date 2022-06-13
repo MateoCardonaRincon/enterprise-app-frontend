@@ -4,8 +4,9 @@ import { removeSupplier } from '../../services/supplierService';
 import { deleteSupplier, supplierType } from '../../state/slice/supplierSlice';
 import { storeType } from '../../state/store';
 
+type Props = {}
 
-const SuppliersTable: React.FunctionComponent = () => {
+const SuppliersTable: React.FC<Props> = (props) => {
 
     const suppliers = useSelector((state: storeType) => state.suppliers);
 

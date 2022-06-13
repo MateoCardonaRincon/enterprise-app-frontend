@@ -27,6 +27,8 @@ select {
   border-radius: 5px;
   font-size: calc(5px + 2vmin);
   padding: 3px;
+  background-color: rgb(234, 234, 234);
+  border: 1px;
 }
 
 p {
@@ -82,4 +84,13 @@ p {
 
 .hidden {
   visibility: hidden;
+}
+
+.credentials-form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 70%;
+  justify-content: center;
+  margin-inline: auto;
 }

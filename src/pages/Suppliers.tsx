@@ -3,7 +3,7 @@ import SupplierSubscription from '../components/suppliers/SupplierSubscription'
 
 type Props = {}
 
-const Suppliers = (props: Props) => {
+const Suppliers: React.FC<Props> = (props) => {
 
     return (
         <div className="d-flex-column flex-container m-5">

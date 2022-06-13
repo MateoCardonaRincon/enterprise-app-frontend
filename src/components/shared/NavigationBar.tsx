@@ -11,7 +11,7 @@ type Props = {}
 
 const NavigationBar: React.FC<Props> = (props) => {
 
-    const isLoggedIn = useSelector((state: storeType) => state.authentication.isLoggedIn);
+    const { isLoggedIn, user } = useSelector((state: storeType) => state.authentication);
 
     const dispatch = useDispatch()
 
@@ -24,6 +24,7 @@ const NavigationBar: React.FC<Props> = (props) => {
 
     const onLogOut = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
+        localStorage.removeItem('token')
         dispatch(setLogOut())
         setShowLoginModal(false);
     };
@@ -44,9 +45,11 @@ const NavigationBar: React.FC<Props> = (props) => {
                     </PrivateComponent>
                 </Nav>
                 {isLoggedIn ?
-                    <button className="btn btn-dark" onClick={(e) => onLogOut(e)}>
-                        Log Out
-                    </button> :
+                    <>
+                        <span className="mx-4">{user}</span>
+                        <button className="btn btn-dark" onClick={(e) => onLogOut(e)}>
+                            Log Out
+                        </button> </> :
                     <button className="btn btn-dark" onClick={(e) => onShowLoginModal(e)}>
                         Log In
                     </button>}

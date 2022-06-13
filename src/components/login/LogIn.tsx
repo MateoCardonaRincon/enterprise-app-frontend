@@ -2,13 +2,16 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../../firebaseConfig";
-import { setLoggedUser, setLogIn, setLogOut } from "../../state/slice/loginSlice";
+import { setLoggedUser, setLogIn, setLogOut, setSessionToken } from "../../state/slice/loginSlice";
+import { useNavigate } from "react-router-dom";
 
 type Props = {}
 
 const LogIn: React.FC<Props> = (props) => {
 
     const dispatch = useDispatch()
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
@@ -22,10 +25,14 @@ const LogIn: React.FC<Props> = (props) => {
             signInWithEmailAndPassword(auth, user, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
+                    const accessToken = user.accessToken
+                    localStorage.setItem('token', accessToken)
+                    dispatch(setSessionToken(accessToken))
                     dispatch(setLoggedUser(user.email))
                     dispatch(setLogIn())
                     setUserNotFound(false)
                     setInvalidEmail(false)
+                    navigate('/welcome')
                 })
                 .catch((error) => {
                     const errorCode = error.code;

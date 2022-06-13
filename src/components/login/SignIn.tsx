@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { auth } from '../../firebaseConfig'
-import { setLoggedUser, setLogIn } from '../../state/slice/loginSlice'
+import { setLoggedUser, setLogIn, setSessionToken } from '../../state/slice/loginSlice'
 
 type Props = {}
 
@@ -23,6 +23,9 @@ const SignIn: React.FC<Props> = (props) => {
             createUserWithEmailAndPassword(auth, user, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
+                    const accessToken = user.accessToken
+                    localStorage.setItem('token', accessToken)
+                    dispatch(setSessionToken(accessToken))
                     dispatch(setLoggedUser(user.email))
                     dispatch(setLogIn())
                     setInvalidEmail(false)

@@ -4,6 +4,7 @@ import LogIn from "./LogIn";
 import { useDispatch, useSelector } from 'react-redux';
 import SignIn from "./SignIn";
 import { storeType } from "../../state/store";
+import GoogleAuth from "./GoogleAuth";
 
 type Props = {
     showLoginModal: boolean,
@@ -41,6 +42,9 @@ const LoginModal: React.FC<Props> = (props) => {
                         <h6 className="d-flex link justify-content-center" onClick={() => { setSignIn(!signIn) }}>
                             {signIn ? "Back to login" : "Or sign in!"}
                         </h6>
+                    </div>
+                    <div>
+                        <GoogleAuth />
                     </div>
                 </div>
 

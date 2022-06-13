@@ -16,10 +16,11 @@ import { getAllSuppliers } from "./state/slice/supplierSlice";
 import { getProducts } from "./services/productService";
 import { getAllProducts } from "./state/slice/productSlice";
 import { storeType } from "./state/store";
+import { setLogIn, setLogOut } from "./state/slice/loginSlice";
 
 function App() {
 
-    const logged = useSelector((state: storeType) => state.authentication.isLoggedIn);
+    const { isLoggedIn, token } = useSelector((state: storeType) => state.authentication);
 
     const dispatch = useDispatch();
 
@@ -34,34 +35,26 @@ function App() {
                 dispatch(getAllProducts(products))
             }
         )
+        if (localStorage.getItem("token")) {
+            dispatch(setLogIn())
+        } else {
+            dispatch(setLogOut())
+        }
     }, [])
 
     return (
         <BrowserRouter>
             <Header />
             <NavigationBar />
-            {logged ?
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/stock" element={<Products />} />
-                    <Route path="/sales" element={<Sales />} />
-                    <Route path="/suppliers" element={<Suppliers />} />
-                    <Route path="/orders" element={<Orders />} />
-                    <Route path="/bills" element={<Bills />} />
-                    <Route path="/notfound" element={<NotFound />} />
-                    <Route path="*" element={<Navigate to="notfound" />} />
-                </Routes> :
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/stock" element={<Navigate to="/" />} />
-                    <Route path="/sales" element={<Navigate to="/" />} />
-                    <Route path="/suppliers" element={<Navigate to="/" />} />
-                    <Route path="/orders" element={<Navigate to="/" />} />
-                    <Route path="/bills" element={<Navigate to="/" />} />
-                    <Route path="/notfound" element={<NotFound />} />
-                    <Route path="*" element={<Navigate to="notfound" />} />
-                </Routes>}
-
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/stock" element={<Products />} />
+                <Route path="/sales" element={<Sales />} />
+                <Route path="/suppliers" element={<Suppliers />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/bills" element={<Bills />} />
+                <Route path="*" element={<Navigate to="" />} />
+            </Routes>
         </BrowserRouter>
     );
 }

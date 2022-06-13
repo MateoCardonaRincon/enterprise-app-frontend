@@ -1,6 +1,12 @@
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { setLogIn, setLogOut } from "../state/slice/loginSlice";
+import { storeType } from "../state/store";
+
 type Props = {}
 
 const Home: React.FC<Props> = (props) => {
+
     return (
         <div className="container">
             <div className="row">

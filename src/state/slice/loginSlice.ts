@@ -2,13 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 type authType = {
-    user?: string,
+    user?: string | null,
     isLoggedIn?: boolean
-    token?: string | null
 }
 
 const initialState: authType = {
-    token: localStorage.getItem('token')
+    user: localStorage.getItem('user')
 }
 
 const loginSlice = createSlice({
@@ -23,14 +22,11 @@ const loginSlice = createSlice({
         },
         setLoggedUser(state, action) {
             return { ...state, user: action.payload }
-        },
-        setSessionToken(state, action) {
-            return { ...state, token: action.payload }
         }
     },
 });
 
-export const { setLogIn, setLogOut, setLoggedUser, setSessionToken } = loginSlice.actions;
+export const { setLogIn, setLogOut, setLoggedUser } = loginSlice.actions;
 
 export default loginSlice.reducer;
 

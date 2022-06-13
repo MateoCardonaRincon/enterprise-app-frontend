@@ -79,7 +79,7 @@ const AddProductForm: React.FC<Props> = (props) => {
 
     return (
         <form className="form" ref={formRef}>
-            <div className="container pt-4 pb-2">
+            <div className="d-flex container pt-4 pb-2 w-100">
 
                 <div className="d-flex flex-row justify-content-center">
                     <h3>Add Product to Stock</h3>

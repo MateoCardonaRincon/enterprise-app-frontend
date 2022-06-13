@@ -20,7 +20,7 @@ import { setLogIn, setLogOut } from "./state/slice/loginSlice";
 
 function App() {
 
-    const { isLoggedIn, token } = useSelector((state: storeType) => state.authentication);
+    const { isLoggedIn } = useSelector((state: storeType) => state.authentication);
 
     const dispatch = useDispatch();
 
@@ -35,7 +35,7 @@ function App() {
                 dispatch(getAllProducts(products))
             }
         )
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("user")) {
             dispatch(setLogIn())
         } else {
             dispatch(setLogOut())

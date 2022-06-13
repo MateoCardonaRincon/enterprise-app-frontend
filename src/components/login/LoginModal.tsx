@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import LogIn from "./LogIn";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SignIn from "./SignIn";
 import { storeType } from "../../state/store";
 import GoogleAuth from "./GoogleAuth";
+import GitHubAuth from "./GitHubAuth";
 
 type Props = {
     showLoginModal: boolean,
@@ -38,13 +39,18 @@ const LoginModal: React.FC<Props> = (props) => {
             <Modal.Body>
                 <div className="d-flex-column">
                     {signIn ? <SignIn /> : <LogIn />}
-                    <div className="row m+4">
+                    <div className="d-flex row">
                         <h6 className="d-flex link justify-content-center" onClick={() => { setSignIn(!signIn) }}>
                             {signIn ? "Back to login" : "Or sign in!"}
                         </h6>
                     </div>
-                    <div>
-                        <GoogleAuth />
+                    <div className="d-flex flex-row">
+                        <div className="col-6">
+                            <GoogleAuth />
+                        </div>
+                        <div className="col-6">
+                            <GitHubAuth />
+                        </div>
                     </div>
                 </div>
 

@@ -24,7 +24,7 @@ const NavigationBar: React.FC<Props> = (props) => {
 
     const onLogOut = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        localStorage.removeItem('token')
+        localStorage.removeItem('user')
         dispatch(setLogOut())
         setShowLoginModal(false);
     };

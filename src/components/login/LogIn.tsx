@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../../firebaseConfig";
-import { setLoggedUser, setLogIn, setLogOut, setSessionToken } from "../../state/slice/loginSlice";
+import { setLoggedUser, setLogIn, setLogOut } from "../../state/slice/loginSlice";
 import { useNavigate } from "react-router-dom";
 
 type Props = {}
@@ -25,9 +25,8 @@ const LogIn: React.FC<Props> = (props) => {
             signInWithEmailAndPassword(auth, user, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    const accessToken = user.accessToken
-                    localStorage.setItem('token', accessToken)
-                    dispatch(setSessionToken(accessToken))
+                    const token = user.getIdToken
+                    localStorage.setItem('user', `${user.email}`)
                     dispatch(setLoggedUser(user.email))
                     dispatch(setLogIn())
                     setUserNotFound(false)
@@ -37,7 +36,7 @@ const LogIn: React.FC<Props> = (props) => {
                 .catch((error) => {
                     const errorCode = error.code;
 
-                    if (errorCode === "auth/user-not-found") {
+                    if (errorCode === "auth/user-not-found" || errorCode === "auth/wrong-password") {
                         setUserNotFound(true)
                         setInvalidEmail(false)
                     }
@@ -45,6 +44,7 @@ const LogIn: React.FC<Props> = (props) => {
                         setInvalidEmail(true)
                         setUserNotFound(false)
                     }
+                    dispatch(setLogOut())
                 });
             setPassword('')
             setUser('')
@@ -78,7 +78,7 @@ const LogIn: React.FC<Props> = (props) => {
                     <button className="btn btn-primary mt-3" onClick={(e) => onLogIn(e)}>Confirm</button><br />
                 </div>
                 {userNotFound ? <div className="row">
-                    <span className="auth-alert mt-1">User not found</span>
+                    <span className="auth-alert mt-1">User not found (retry using Google or GitHub)</span>
                 </div> : <></>}
                 {invalidEmail ? <div className="row">
                     <span className="auth-alert mt-1">Invalid email</span>

@@ -2,9 +2,9 @@ import { signInWithPopup, GoogleAuthProvider, OAuthCredential } from "firebase/a
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { auth } from "../../firebaseConfig";
-import { setLoggedUser, setLogIn, setSessionToken } from "../../state/slice/loginSlice";
+import { setLoggedUser, setLogIn } from "../../state/slice/loginSlice";
 
-const providerGoogleAuth = new GoogleAuthProvider();
+const googleAuthProvider = new GoogleAuthProvider();
 
 type Props = {}
 
@@ -16,7 +16,7 @@ const GoogleAuth: React.FC<Props> = (props) => {
 
     const signInWithGoogleButton = () => {
 
-        signInWithPopup(auth, providerGoogleAuth)
+        signInWithPopup(auth, googleAuthProvider)
             .then((result) => {
                 const credential: OAuthCredential | null = GoogleAuthProvider.credentialFromResult(result);
 
@@ -26,8 +26,7 @@ const GoogleAuth: React.FC<Props> = (props) => {
 
                 dispatch(setLogIn())
                 dispatch(setLoggedUser(user.email))
-                localStorage.setItem('token', `${token}`)
-                dispatch(setSessionToken(token))
+                localStorage.setItem('user', `${user.email}`)
 
                 navigate('/welcome')
             }).catch((error) => {

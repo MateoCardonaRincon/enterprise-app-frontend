@@ -1,17 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: boolean = false;
+
+type authType = {
+    user?: string,
+    isLoggedIn?: boolean
+}
+
+const initialState: authType = {}
 
 const loginSlice = createSlice({
-  name: "login",
-  initialState,
-  reducers: {
-    toggleLogin(state) {
-      return !state;
+    name: "authentication",
+    initialState,
+    reducers: {
+        setLogIn(state) {
+            return { ...state, isLoggedIn: true };
+        },
+        setLogOut(state) {
+            return { ...state, isLoggedIn: false }
+        },
+        setLoggedUser(state, action) {
+            return { ...state, user: action.payload }
+        }
     },
-  },
 });
 
-export const { toggleLogin } = loginSlice.actions;
+export const { setLogIn, setLogOut, setLoggedUser } = loginSlice.actions;
 
 export default loginSlice.reducer;
+
+export type { authType }

@@ -3,20 +3,29 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import PrivateComponent from "./PrivateComponent";
 import { Link } from "react-router-dom";
 import LoginModal from "../login/LoginModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { storeType } from "../../state/store";
+import { setLogOut } from "../../state/slice/loginSlice";
 
 type Props = {}
 
 const NavigationBar: React.FC<Props> = (props) => {
 
-    const logged = useSelector((state: storeType) => state.logged);
+    const isLoggedIn = useSelector((state: storeType) => state.authentication.isLoggedIn);
+
+    const dispatch = useDispatch()
 
     const [showLoginModal, setShowLoginModal] = useState(false);
 
     const onShowLoginModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         setShowLoginModal(true);
+    };
+
+    const onLogOut = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        dispatch(setLogOut())
+        setShowLoginModal(false);
     };
 
     return (
@@ -34,8 +43,8 @@ const NavigationBar: React.FC<Props> = (props) => {
                         </>
                     </PrivateComponent>
                 </Nav>
-                {logged ?
-                    <button className="btn btn-dark" onClick={(e) => onShowLoginModal(e)}>
+                {isLoggedIn ?
+                    <button className="btn btn-dark" onClick={(e) => onLogOut(e)}>
                         Log Out
                     </button> :
                     <button className="btn btn-dark" onClick={(e) => onShowLoginModal(e)}>
@@ -48,3 +57,4 @@ const NavigationBar: React.FC<Props> = (props) => {
 };
 
 export default NavigationBar;
+

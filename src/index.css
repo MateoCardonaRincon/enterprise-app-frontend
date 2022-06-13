@@ -40,6 +40,11 @@ p {
   font-size: 12px;
 }
 
+.link:hover {
+    color: rgb(47, 139, 206);
+    cursor: pointer;
+}
+
 .form {
   background-color: #90bdff;
   border-radius: 5px;
@@ -93,4 +98,9 @@ p {
   width: 70%;
   justify-content: center;
   margin-inline: auto;
+}
+
+.auth-alert{
+    color: red;
+    font-size: 12px;
 }

@@ -1,37 +1,52 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { auth } from '../../firebaseConfig'
+import { setLoggedUser, setLogIn } from '../../state/slice/loginSlice'
 
 type Props = {}
 
 const SignIn: React.FC<Props> = (props) => {
 
+    const dispatch = useDispatch()
+
+    const formRef = useRef(null)
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
+    const [weakPassword, setWeakPassword] = useState(false)
+    const [invalidEmail, setInvalidEmail] = useState(false)
 
     const onSignIn = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        
+
         if (password && user) {
             createUserWithEmailAndPassword(auth, user, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    console.log("****user****");
-                    console.log(user);
+                    dispatch(setLoggedUser(user.email))
+                    dispatch(setLogIn())
+                    setInvalidEmail(false)
+                    setWeakPassword(false)
+                    setPassword('')
+                    setUser('')
                 })
                 .catch((error) => {
-                    const errorMessage = error.message;
-                    console.log('*** sign in error ***');
-                    console.log(errorMessage);
-                });
+                    const errorCode = error.code;
 
-            setUser('')
-            setPassword('')
+                    if (errorCode === "auth/weak-password") {
+                        setWeakPassword(true)
+                        setInvalidEmail(false)
+                    }
+                    if (errorCode === "auth/invalid-email") {
+                        setInvalidEmail(true)
+                        setWeakPassword(false)
+                    }
+                });
         }
     }
 
     return (
-        <form className="credentials-form">
+        <form className="credentials-form" ref={formRef}>
             <div className="container">
                 <div className="d-flex flex-row my-3 justify-content-center">
                     <h3>Sign In</h3>
@@ -51,11 +66,21 @@ const SignIn: React.FC<Props> = (props) => {
                         type="password"
                         name="password"
                         placeholder="Password"
+                        value={password}
                     />
                 </div>
                 <div className="row">
-                    <button className="btn btn-primary my-3" onClick={(e) => onSignIn(e)}>Log In</button><br />
+                    <button className="btn btn-primary mt-3" onClick={(e) => onSignIn(e)}>Confirm</button><br />
                 </div>
+                {weakPassword ? <div className="row  mt-1">
+                    <span className="auth-alert">Weak password (at least 6 characters are required)</span>
+                </div> : <></>}
+                {invalidEmail ? <div className="row  mt-1">
+                    <span className="auth-alert">Invalid email</span>
+                </div> : <></>}
+                {invalidEmail ? <div className="row  mt-1">
+                    <span className="auth-alert">Invalid email</span>
+                </div> : <></>}
             </div>
         </form>
     )

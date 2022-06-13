@@ -3,7 +3,12 @@ import { productType } from "../state/slice/productSlice";
 import { ROOT } from "./apiConfig";
 
 export const getProducts = async (): Promise<productType[]> => {
-    let response = await fetch(ROOT + "/product/getall")
+    let response = await fetch(ROOT + "/product/getall", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    })
     let data = await response.json()
     return data
 }
@@ -12,7 +17,8 @@ export const saveProduct = async (product: productType): Promise<productType> =>
     let productSaved = await fetch(ROOT + "/product/create", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(product)
     }).then(response => response.json());
@@ -24,7 +30,8 @@ export const increaseProductStock = async (order: orderType): Promise<productTyp
     let productRestocked = await fetch(`${ROOT}/product/restock/${order.units}`, {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json"
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(order.product)
     }).then(response => response.json());

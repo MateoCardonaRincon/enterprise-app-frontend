@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { auth } from '../../firebaseConfig'
 import { setLoggedUser, setLogIn, setLogOut } from '../../state/slice/loginSlice'
 
@@ -9,6 +10,8 @@ type Props = {}
 const SignIn: React.FC<Props> = (props) => {
 
     const dispatch = useDispatch()
+
+    const navigate = useNavigate();
 
     const formRef = useRef(null)
     const [user, setUser] = useState('')
@@ -31,6 +34,7 @@ const SignIn: React.FC<Props> = (props) => {
                     setWeakPassword(false)
                     setPassword('')
                     setUser('')
+                    navigate('/')
                 })
                 .catch((error) => {
                     const errorCode = error.code;

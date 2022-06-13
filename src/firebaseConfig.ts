@@ -6,12 +6,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC3gIudHISk_7qor3A9OGfkE-PgGOqvKQQ",
-  authDomain: "don-rauls-hardware-store.firebaseapp.com",
-  projectId: "don-rauls-hardware-store",
-  storageBucket: "don-rauls-hardware-store.appspot.com",
-  messagingSenderId: "365129911418",
-  appId: "1:365129911418:web:fd3ecc81eaead9ea36ffc3"
+    apiKey: "AIzaSyC3gIudHISk_7qor3A9OGfkE-PgGOqvKQQ",
+    authDomain: "don-rauls-hardware-store.firebaseapp.com",
+    projectId: "don-rauls-hardware-store",
+    storageBucket: "don-rauls-hardware-store.appspot.com",
+    messagingSenderId: "365129911418",
+    appId: "1:365129911418:web:fd3ecc81eaead9ea36ffc3"
 };
 
 // Initialize Firebase

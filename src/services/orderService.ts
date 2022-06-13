@@ -11,7 +11,8 @@ export const saveOrder = async (order: orderType): Promise<orderType> => {
     let orderSaved = await fetch(ROOT + "/order/create", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(order)
     }).then(response => response.json());

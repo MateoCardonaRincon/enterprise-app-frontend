@@ -11,7 +11,8 @@ export const saveBill = async (bill: billType): Promise<billType> => {
     let billSaved = await fetch(ROOT + "/bill/create", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(bill)
     }).then(response => response.json());

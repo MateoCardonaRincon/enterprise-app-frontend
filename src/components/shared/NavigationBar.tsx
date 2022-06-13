@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import PrivateComponent from "./PrivateComponent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginModal from "../login/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { storeType } from "../../state/store";
@@ -10,6 +10,8 @@ import { setLogOut } from "../../state/slice/loginSlice";
 type Props = {}
 
 const NavigationBar: React.FC<Props> = (props) => {
+
+    const navigate = useNavigate();
 
     const { isLoggedIn, user } = useSelector((state: storeType) => state.authentication);
 
@@ -27,6 +29,7 @@ const NavigationBar: React.FC<Props> = (props) => {
         localStorage.removeItem('user')
         dispatch(setLogOut())
         setShowLoginModal(false);
+        navigate('/')
     };
 
     return (

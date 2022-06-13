@@ -26,7 +26,7 @@ const GitHubAuth: React.FC<Props> = (props) => {
                 dispatch(setLoggedUser(user.email))
                 localStorage.setItem('user', `${user.email}`)
 
-                navigate('/welcome')
+                navigate('/')
             }).catch((error) => {
                 const credential = GithubAuthProvider.credentialFromError(error);
                 console.log(error)

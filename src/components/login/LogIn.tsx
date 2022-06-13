@@ -31,7 +31,7 @@ const LogIn: React.FC<Props> = (props) => {
                     dispatch(setLogIn())
                     setUserNotFound(false)
                     setInvalidEmail(false)
-                    navigate('/welcome')
+                    navigate('/')
                 })
                 .catch((error) => {
                     const errorCode = error.code;

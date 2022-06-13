@@ -11,7 +11,8 @@ export const saveSupplier = async (supplier: supplierType): Promise<supplierType
     let supplierSaved = await fetch(ROOT + "/supplier/subscribe", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(supplier)
     }).then(response => response.json());

@@ -3,12 +3,7 @@ import { productType } from "../state/slice/productSlice";
 import { ROOT } from "./apiConfig";
 
 export const getProducts = async (): Promise<productType[]> => {
-    let response = await fetch(ROOT + "/product/getall", {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        }
-    })
+    let response = await fetch(ROOT + "/product/getall")
     let data = await response.json()
     return data
 }

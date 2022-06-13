@@ -1,14 +1,15 @@
 import { orderType } from "../state/slice/orderSlice";
 import { productType } from "../state/slice/productSlice";
+import { ROOT } from "./apiConfig";
 
 export const getProducts = async (): Promise<productType[]> => {
-    let response = await fetch("http://localhost:8080/product/getall")
+    let response = await fetch(ROOT + "/product/getall")
     let data = await response.json()
     return data
 }
 
 export const saveProduct = async (product: productType): Promise<productType> => {
-    let productSaved = await fetch("http://localhost:8080/product/create", {
+    let productSaved = await fetch(ROOT + "/product/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -20,7 +21,7 @@ export const saveProduct = async (product: productType): Promise<productType> =>
 }
 
 export const increaseProductStock = async (order: orderType): Promise<productType> => {
-    let productRestocked = await fetch(`http://localhost:8080/product/restock/${order.units}`, {
+    let productRestocked = await fetch(`${ROOT}/product/restock/${order.units}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

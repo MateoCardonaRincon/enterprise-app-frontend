@@ -1,13 +1,14 @@
 import { orderType } from "../state/slice/orderSlice";
+import { ROOT } from "./apiConfig";
 
 export const getOrders = async (): Promise<orderType[]> => {
-    let response = await fetch("http://localhost:8080/order/getall")
+    let response = await fetch(ROOT + "/order/getall")
     let data = await response.json()
     return data
 }
 
 export const saveOrder = async (order: orderType): Promise<orderType> => {
-    let orderSaved = await fetch("http://localhost:8080/order/create", {
+    let orderSaved = await fetch(ROOT + "/order/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
